@@ -5,12 +5,13 @@ ARG NODE_VERSION=14.15.2
 # This tells Docker to install an OS (Alpine) with Node
 FROM node:${NODE_VERSION}-alpine
 
-EXPOSE 3000 9229
 # EXPOSE is not publishing any ports, it is just a form of a documentation
+EXPOSE 3000 9229
 
 #  Creates a folder in the docker container called 'src'
 WORKDIR /src
 
+# Because Alpine is so small that we have to install things we need
 RUN apk add	postgresql-client redis
 
 ARG environment

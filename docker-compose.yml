@@ -2,11 +2,13 @@ version: "3.8"
 
 services:
   redis:
-    file: docker-compose.base.yml
-    service: redis
+    extends:
+      file: docker-compose.base.yml
+      service: redis
   postgres:
-    file: docker-compose.base.yml
-    service: postgres
+    extends:
+      file: docker-compose.base.yml
+      service: postgres
   app:
     build: .
     volumes:

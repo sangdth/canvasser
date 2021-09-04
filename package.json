@@ -13,10 +13,10 @@
   "scripts": {
     "docker:prod": "docker-compose -f docker-compose.yml up",
     "docker:dev": "docker-compose -f docker-compose.local.yml up",
-    "dev": "nodemon --watch src -e ts --exec ts-node src/server.ts",
-    "compile": "tsc --project tsconfig.json",
+    "dev": "nodemon --watch src -e ts --exec ts-node --transpile-only src/server.ts",
+    "transpile": "tsc --project tsconfig.json",
     "lint": "eslint \"**/*.ts\" --quiet",
-    "build": "yarn lint && yarn compile",
+    "build": "yarn lint && yarn transpile",
     "start": "node dist/server.js"
   },
   "dependencies": {

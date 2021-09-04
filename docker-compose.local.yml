@@ -13,7 +13,7 @@ services:
       - POSTGRES_DB=canvasser_development
       - POSTGRES_USER=canvasser
       - POSTGRES_HOST_AUTH_METHOD=trust
-  dev:
+  app:
     build:
       context: .
       args:
@@ -27,3 +27,4 @@ services:
     depends_on:
       - postgres
       - redis
+    command: ["yarn", "dev"]
