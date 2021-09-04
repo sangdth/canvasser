@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  redis:
+    extends:
+      file: docker-compose.base.yml
+      service: redis
+  postgres:
+    extends:
+      file: docker-compose.base.yml
+      service: postgres
+    environment:
+      - POSTGRES_DB=canvasser_development
+      - POSTGRES_USER=canvasser
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  dev:
+    build:
+      context: .
+      args:
+        environment: "development"
+    volumes:
+      - .:/src
+    working_dir: /src
+    environment:
+      - POSTGRES_URL=postgres://canvasser@postgres:5432/canvasser_development
+      - REDIS_URL=redis://redis:6379/14
+    depends_on:
+      - postgres
+      - redis

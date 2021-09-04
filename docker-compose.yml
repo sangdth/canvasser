@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  redis:
+    file: docker-compose.base.yml
+    service: redis
+  postgres:
+    file: docker-compose.base.yml
+    service: postgres
+  app:
+    build: .
+    volumes:
+      - .:/src
+    ports:
+      - "19000:19000"
+    environment:
+      - PORT=19000

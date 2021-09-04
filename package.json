@@ -2,24 +2,28 @@
   "name": "canvasser",
   "version": "1.0.0",
   "description": "Simple server starter with Koa, Bull, Docker, TypeScript",
+  "author": "Sang Dang",
+  "license": "MIT",
   "main": "dist/server.js",
   "declaration": true,
   "repository": {
     "type": "git",
     "url": "git@github.com:sangdth/canvasser.git"
   },
-  "author": "Sang Dang",
   "scripts": {
+    "docker:prod": "docker-compose -f docker-compose.yml up",
+    "docker:dev": "docker-compose -f docker-compose.local.yml up",
     "dev": "nodemon --watch src -e ts --exec ts-node src/server.ts",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "start": "node dist/server.js",
-    "prepublish": "yarn lint && tsc"
+    "compile": "tsc --project tsconfig.json",
+    "lint": "eslint \"**/*.ts\" --quiet",
+    "build": "yarn lint && yarn compile",
+    "start": "node dist/server.js"
   },
-  "license": "MIT",
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
+    "bull": "^3.29.1",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
     "koa-helmet": "^6.1.0",

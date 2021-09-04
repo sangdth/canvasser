@@ -6,7 +6,6 @@ const router = new Router();
 
 router.get('/', async (ctx) => {
   ctx.body = 'Hello World!';
-  return 'asdf';
 });
 
 app.use(router.routes());
