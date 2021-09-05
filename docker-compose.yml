@@ -10,10 +10,14 @@ services:
       file: docker-compose.base.yml
       service: postgres
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - NODE_ENV=production
     volumes:
       - .:/src
     ports:
-      - "19000:19000"
+      - "3000:3000"
     environment:
-      - PORT=19000
+      - NODE_ENV=production
+    command: ["yarn", "server:prod"]

@@ -7,7 +7,7 @@ services:
       test: "[ $$(redis-cli ping) == 'PONG' ]"
       interval: 5s
     ports:
-      - "24001:6379"
+      - "6379:6379"
   postgres:
     image: postgres:13.4-alpine
     ports:

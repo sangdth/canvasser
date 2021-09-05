@@ -14,10 +14,11 @@ WORKDIR /src
 # Because Alpine is so small that we have to install things we need
 RUN apk add	postgresql-client redis
 
-ARG environment
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
 
 # required for docker:test:watch
-RUN if [ "${environment}" = "development" ]; then apk add git; fi
+RUN if [ "${NODE_ENV}" = "development" ]; then apk add git; fi
 
 # Copy the dependencies file into our container folder
 ADD package.json yarn.lock ./
@@ -27,7 +28,12 @@ RUN yarn install --frozen-lockfile --link-duplicates
 
 # Copy everything from our current directory to the WORKDIR. This moves all of our source code
 ADD . .
+# COPY --chown=node:node . /usr/src/app
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+# USER node
+
+# Read number 5
+# https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker
+CMD ["yarn", "server:prod"]

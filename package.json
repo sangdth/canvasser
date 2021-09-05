@@ -11,13 +11,13 @@
     "url": "git@github.com:sangdth/canvasser.git"
   },
   "scripts": {
-    "docker:prod": "docker-compose -f docker-compose.yml up",
-    "docker:dev": "docker-compose -f docker-compose.local.yml up",
-    "dev": "nodemon --watch src -e ts --exec ts-node --transpile-only src/server.ts",
-    "transpile": "tsc --project tsconfig.json",
     "lint": "eslint \"**/*.ts\" --quiet",
-    "build": "yarn lint && yarn transpile",
-    "start": "node dist/server.js"
+    "transpile": "tsc --project tsconfig.json",
+    "prestart": "yarn lint && yarn transpile",
+    "server:dev": "nodemon --watch src -e ts --exec ts-node --transpile-only src/server.ts",
+    "server:prod": "node dist/server.js",
+    "dev": "docker-compose -f docker-compose.local.yml up --remove-orphans",
+    "start": "docker-compose -f docker-compose.yml up"
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",

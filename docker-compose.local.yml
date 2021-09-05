@@ -17,14 +17,14 @@ services:
     build:
       context: .
       args:
-        environment: "development"
+        - NODE_ENV=development
+    ports:
+      - "3000:3000"
     volumes:
       - .:/src
     working_dir: /src
     environment:
+      - NODE_ENV=development
       - POSTGRES_URL=postgres://canvasser@postgres:5432/canvasser_development
       - REDIS_URL=redis://redis:6379/14
-    depends_on:
-      - postgres
-      - redis
-    command: ["yarn", "dev"]
+    command: ["yarn", "server:dev"]
